@@ -3,7 +3,7 @@ const { User, Thought} = require('../models');
 const thoughtController = {
   // /api/thoughts
 
-  // get all thoughts
+  //  retrieves all thoughts in the database and populates their reactions.
   getAllThought(req, res) {
     Thought.find({})
       .populate({
@@ -19,7 +19,7 @@ const thoughtController = {
       });
   },
 
-  // get one thoughts by id
+  // retrieves a single thought by its ID and populates its reactions.
   getThoughtById({ params }, res) {
     Thought.findOne({ _id: params.id })
       .populate({
@@ -41,6 +41,7 @@ const thoughtController = {
       });
   },
 
+// creates a new thought in the database and adds it to the User's thoughts array.
   createThought({ body }, res) {
     Thought.create(body)
         .then(({ _id }) => {
@@ -60,7 +61,7 @@ const thoughtController = {
         .catch(err => res.json(err));
 },
 
-  // update Thought by id
+  // updates a thought by its ID with the provided data.
   updateThought({ params, body }, res) {
     Thought.findOneAndUpdate({ _id: params.id }, body, { new: true, runValidators: true })
       .then(dbThoughtData => {
@@ -73,7 +74,7 @@ const thoughtController = {
       .catch(err => res.json(err));
   },
 
-  // delete thought by ID
+  // deletes a thought by its ID and removes it from the User's thoughts array.
   deleteThought({ params }, res) {
     Thought.findOneAndDelete({ _id: params.id })
       .then(dbThoughtData => {
@@ -97,6 +98,7 @@ const thoughtController = {
       .catch(err => res.json(err));
   },
 
+// adds a new reaction to a thought by its ID.
   createReaction({params, body}, res) {
     Thought.findOneAndUpdate(
       {_id: params.thoughtId}, 
@@ -114,6 +116,7 @@ const thoughtController = {
     .catch(err => res.status(400).json(err))
 },
 
+// deletes a reaction from a thought by its ID and the reaction's ID.
   deleteReaction({ params }, res) {
     Thought.findOneAndUpdate(
       { _id: params.thoughtId },
@@ -133,4 +136,4 @@ const thoughtController = {
 
 };
 
-module.exports = thoughtController
+module.exports = thoughtController; // The line is exporting the thoughtController object as a module 
