@@ -1,5 +1,6 @@
-const router = require('express').Router();
+const router = require('express').Router(); // creates a new instance of the Express.js Router middleware.
 
+//  imports the user controller's functions for handling each request.
 const {
     getAllUser,
     getUserById,
@@ -10,22 +11,26 @@ const {
     deleteFriend
   } = require('../../controllers/user-controller');
 
-// Set up GET all and POST at /api/users
+/* sets up the route for getting all users and creating a new user. 
+This route is set up using the .route() method of the router object and chaining the .get() and .post() methods. */
 router
   .route('/')
   .get(getAllUser)
   .post(createUser);
 
-// Set up GET one, PUT, and DELETE at /api/users/:id
+/* sets up the route for getting a single user by ID, updating a user, and deleting a user. 
+This route is set up using the .route() method of the router object and chaining the .get(), .put(), and .delete() methods.*/
 router
   .route('/:id')
   .get(getUserById)
   .put(updateUser)
   .delete(deleteUser);
 
+/* sets up the route for adding and deleting a friend for a user. 
+This route is set up using the .route() method of the router object and chaining the .post() and .delete() methods.*/
 router
   .route('/:userId/friends/:friendId')
   .post(addFriend)
   .delete(deleteFriend);
 
-module.exports = router;
+module.exports = router; // exports the router middleware for use in the main server file.
