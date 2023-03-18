@@ -23,9 +23,6 @@ This is a set of API for a social network that uses a MongoDB database so that t
 
 ## Walkthrough Videos
 [User Routes]()  
-[Friend Routes]()  
-[Thought Routes]()  
-[Reaction Routes]()  
 
 ## Installation:
 This repo is not to be deployed, if you wanted to, you could by doing the following:  
